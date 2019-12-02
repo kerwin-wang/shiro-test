@@ -1,6 +1,9 @@
 package com.kerwin.shiro.controller;
 
+import com.kerwin.shiro.entity.User;
+import com.kerwin.shiro.service.IUserService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -15,9 +18,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/user")
 public class UserController
 {
+    @Autowired
+    private IUserService userService;
+
     @RequestMapping("/home")
     public String home(){
         log.info("this is user home");
+        User user = userService.getUser(1L);
+        log.info(user.toString());
         return "home";
     }
 }

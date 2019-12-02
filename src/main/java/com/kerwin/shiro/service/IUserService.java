@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
  * <p>
- * 系统用户 服务类
+ *  服务类
  * </p>
  *
  * @author sy
@@ -13,4 +13,10 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IUserService extends IService<User> {
     User getUser(Long id);
+
+    int updateUser(User user);
+
+    int insertUser(User user);
+
+    User getUserByUserName(String userName);
 }

@@ -1,37 +1,43 @@
 package com.kerwin.shiro.entity;
 
-import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.time.LocalDateTime;
-import com.baomidou.mybatisplus.annotation.TableField;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <p>
- * 系统用户
+ * 
  * </p>
  *
  * @author sy
  * @since 2019-12-02
  */
-@TableName("sys_user")
 public class User implements Serializable {
 
     private static final long serialVersionUID=1L;
 
-    @TableId(value = "user_id", type = IdType.AUTO)
-    private Long userId;
+    @TableId(value = "id", type = IdType.AUTO)
+    private Integer id;
+
+    /**
+     * 用户id
+     */
+    private String userId;
 
     /**
      * 用户名
      */
     private String username;
 
-    /**
-     * 密码
-     */
     private String password;
+
+    /**
+     * 加密盐值
+     */
+    private String salt;
 
     /**
      * 邮箱
@@ -39,75 +45,54 @@ public class User implements Serializable {
     private String email;
 
     /**
-     * 手机号
+     * 联系方式
      */
-    private String mobile;
+    private String phone;
 
     /**
-     * 状态  0：禁用   1：正常
+     * 年龄：1男2女
+     */
+    private Integer sex;
+
+    /**
+     * 年龄
+     */
+    private Integer age;
+
+    /**
+     * 用户状态：1有效; 2删除
      */
     private Integer status;
 
     /**
-     * 创建者ID
-     */
-    private Long createUserId;
-
-    /**
      * 创建时间
      */
-    private LocalDateTime createTime;
+    private Date createTime;
 
     /**
-     * 部门ID
+     * 更新时间
      */
-    private Long deptId;
+    private Date updateTime;
 
     /**
-     * 商户id
+     * 最后登录时间
      */
-    private Long merchantId;
-
-    /**
-     * 商铺名称
-     */
-    private String merchantName;
-
-    /**
-     * 本人分佣金
-     */
-    @TableField("FX")
-    private Double fx;
-
-    /**
-     * 一级分佣金
-     */
-    @TableField("FX1")
-    private Double fx1;
-
-    /**
-     * 二级分佣金
-     */
-    @TableField("FX2")
-    private Double fx2;
-
-    /**
-     * 平台分佣金
-     */
-    @TableField("PFX")
-    private Double pfx;
-
-    /**
-     * 是否显示其他商户 0:不显示，1:显示
-     */
-    private Integer allShow;
+    private Date lastLoginTime;
 
 
-    public Long getUserId() {
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
@@ -127,6 +112,14 @@ public class User implements Serializable {
         this.password = password;
     }
 
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -135,12 +128,28 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public String getMobile() {
-        return mobile;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public Integer getSex() {
+        return sex;
+    }
+
+    public void setSex(Integer sex) {
+        this.sex = sex;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
     }
 
     public Integer getStatus() {
@@ -151,105 +160,32 @@ public class User implements Serializable {
         this.status = status;
     }
 
-    public Long getCreateUserId() {
-        return createUserId;
-    }
-
-    public void setCreateUserId(Long createUserId) {
-        this.createUserId = createUserId;
-    }
-
-    public LocalDateTime getCreateTime() {
+    public Date getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(LocalDateTime createTime) {
+    public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 
-    public Long getDeptId() {
-        return deptId;
+    public Date getUpdateTime() {
+        return updateTime;
     }
 
-    public void setDeptId(Long deptId) {
-        this.deptId = deptId;
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
     }
 
-    public Long getMerchantId() {
-        return merchantId;
+    public Date getLastLoginTime() {
+        return lastLoginTime;
     }
 
-    public void setMerchantId(Long merchantId) {
-        this.merchantId = merchantId;
-    }
-
-    public String getMerchantName() {
-        return merchantName;
-    }
-
-    public void setMerchantName(String merchantName) {
-        this.merchantName = merchantName;
-    }
-
-    public Double getFx() {
-        return fx;
-    }
-
-    public void setFx(Double fx) {
-        this.fx = fx;
-    }
-
-    public Double getFx1() {
-        return fx1;
-    }
-
-    public void setFx1(Double fx1) {
-        this.fx1 = fx1;
-    }
-
-    public Double getFx2() {
-        return fx2;
-    }
-
-    public void setFx2(Double fx2) {
-        this.fx2 = fx2;
-    }
-
-    public Double getPfx() {
-        return pfx;
-    }
-
-    public void setPfx(Double pfx) {
-        this.pfx = pfx;
-    }
-
-    public Integer getAllShow() {
-        return allShow;
-    }
-
-    public void setAllShow(Integer allShow) {
-        this.allShow = allShow;
+    public void setLastLoginTime(Date lastLoginTime) {
+        this.lastLoginTime = lastLoginTime;
     }
 
     @Override
     public String toString() {
-        return "User{" +
-        "userId=" + userId +
-        ", username=" + username +
-        ", password=" + password +
-        ", email=" + email +
-        ", mobile=" + mobile +
-        ", status=" + status +
-        ", createUserId=" + createUserId +
-        ", createTime=" + createTime +
-        ", deptId=" + deptId +
-        ", merchantId=" + merchantId +
-        ", merchantName=" + merchantName +
-        ", fx=" + fx +
-        ", fx1=" + fx1 +
-        ", fx2=" + fx2 +
-        ", pfx=" + pfx +
-        ", allShow=" + allShow +
-        "}";
+        return ToStringBuilder.reflectionToString(this);
     }
 }

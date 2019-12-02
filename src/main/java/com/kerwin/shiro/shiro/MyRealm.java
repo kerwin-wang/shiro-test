@@ -1,13 +1,17 @@
 package com.kerwin.shiro.shiro;
 
+import com.kerwin.shiro.entity.User;
+import com.kerwin.shiro.service.IPermissionService;
+import com.kerwin.shiro.service.IRoleService;
+import com.kerwin.shiro.service.IUserService;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 /**
@@ -20,14 +24,28 @@ import org.springframework.stereotype.Component;
 public class MyRealm extends AuthorizingRealm
 {
     @Autowired
-    private JdbcTemplate jdbcTemplate;
+    private IUserService userService;
 
+    @Autowired
+    private IRoleService roleService;
 
+    @Autowired
+    private IPermissionService permissionService;
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection)
     {
-        String userName = (String) principalCollection.getPrimaryPrincipal();
+//        String username = (String) principalCollection.getPrimaryPrincipal();
+//        SecurityUtils.getSubject().getSession();
+//        SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
+//
+//        List<Role> roleByUsername = roleService.getRoleByUsername(username);
+//        Permission permissionByUserName = permissionService.getPermissionByUserName(username);
+//        Set<String> roleNames =
+//                Set<String> permNames =
+//        authorizationInfo.setRoles(roleNames);
+//        authorizationInfo.setStringPermissions(permNames);
+//        return authorizationInfo;
 
         return null;
     }
@@ -37,9 +55,13 @@ public class MyRealm extends AuthorizingRealm
     {
 
         String userName = (String) authenticationToken.getPrincipal();
-        String password = (String) authenticationToken.getCredentials();
-
-        return null;
+        User user = userService.getUserByUserName(userName);
+        if (user == null)
+        {
+            //登陆失败
+            return null;
+        }
+        return new SimpleAuthenticationInfo(user.getUsername(), user.getPassword(), this.getClass().getSimpleName());
     }
 
 }

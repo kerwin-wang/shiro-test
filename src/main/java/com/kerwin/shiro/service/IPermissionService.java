@@ -3,6 +3,8 @@ package com.kerwin.shiro.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.kerwin.shiro.entity.Permission;
 
+import java.util.List;
+
 /**
  * <p>
  * 服务类
@@ -13,6 +15,6 @@ import com.kerwin.shiro.entity.Permission;
  */
 public interface IPermissionService extends IService<Permission>
 {
-    Permission getPermissionByUserName(String username);
+    List<Permission> getPermissionByUserName(String username);
 
 }

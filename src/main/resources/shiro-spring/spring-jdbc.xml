@@ -20,7 +20,7 @@
     <bean id="sqlSessionFactory" class="com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="mapperLocations" value="classpath:spring-mybatisPlus/mapper/*.xml"/>
-        <property name="typeAliasesPackage" value="org.sy.library.entity.*"/>
+        <property name="typeAliasesPackage" value="com.kerwin.shiro.entity"/>
         <property name="configLocation" value="classpath:spring-mybatisPlus/mybatisPlus-config.xml"/>
         <property name="globalConfig" ref="globalConfig"/>
         <property name="plugins">
@@ -49,8 +49,9 @@
     </bean>
 
     <!-- MyBatis 动态扫描  -->
-    <bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.kerwin.shiro.dao"/>
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!--<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>-->
+        <property name="basePackage" value="com.kerwin.shiro.mapper"/>
     </bean>
 
 </beans>

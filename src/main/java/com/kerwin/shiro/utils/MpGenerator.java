@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.config.*;
 import com.baomidou.mybatisplus.generator.config.converts.MySqlTypeConvert;
+import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 
 /**
@@ -23,11 +24,15 @@ public class MpGenerator
 
         //全局配置
         GlobalConfig gc = new GlobalConfig();
-        gc.setOutputDir("E:\\workBussiness\\code\\shiro-test\\src\\main\\java");
+        gc.setOutputDir("D:\\code\\shiro-test-git\\src\\main\\java");
         gc.setFileOverride(false);
         gc.setEnableCache(false);
         gc.setActiveRecord(false);
-        gc.setAuthor("sy");
+        // XML ResultMap
+        gc.setBaseResultMap(true);
+        gc.setBaseColumnList(true);
+        gc.setAuthor("wd");
+        gc.setDateType(DateType.ONLY_DATE);
         mpg.setGlobalConfig(gc);
 
         //数据源配置
@@ -37,13 +42,13 @@ public class MpGenerator
         dsc.setDriverName("com.mysql.cj.jdbc.Driver");
         dsc.setUsername("root");
         dsc.setPassword("qwe123!@#");
-        dsc.setUrl("jdbc:mysql://192.168.9.23:3306/final?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai");
+        dsc.setUrl("jdbc:mysql://localhost:3306/shiro?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai");
         mpg.setDataSource(dsc);
 
         //策略配置
         StrategyConfig strategy = new StrategyConfig();
         // 需要生成的表
-        strategy.setInclude(new String[] { "sys_user" });
+        strategy.setInclude(new String[] { "user","role","permission","user_role","role_permission" });
         // 此处可以修改为您的表前缀
         strategy.setTablePrefix("sys_");
         // 表名生成策略

@@ -3,4 +3,11 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+    <typeAliases>
+        <typeAlias type="com.kerwin.shiro.entity.User" alias="User"/>
+        <typeAlias type="com.kerwin.shiro.entity.Role" alias="Role"/>
+        <typeAlias type="com.kerwin.shiro.entity.Permission" alias="Permission"/>
+        <typeAlias type="com.kerwin.shiro.entity.UserRole" alias="UserRole"/>
+        <typeAlias type="com.kerwin.shiro.entity.RolePermission" alias="RolePermission"/>
+    </typeAliases>
 </configuration>

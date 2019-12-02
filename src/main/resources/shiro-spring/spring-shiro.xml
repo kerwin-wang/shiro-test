@@ -7,7 +7,7 @@
     <bean id="myRealm" class="com.kerwin.shiro.shiro.MyRealm"/>
 
     <!-- 自定义的登陆过滤器  /home=authc,userSession -->
-    <bean id="userSessionFilter" class="com.tingcream.shiroSpring.common.UserSessionFilter"/>
+    <bean id="userSessionFilter" class="com.kerwin.shiro.shiro.MySessionFilter"/>
 
     <!-- 安全管理器 -->
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
@@ -19,9 +19,10 @@
         <!-- Shiro的核心安全接口,这个属性是必须的 -->
         <property name="securityManager" ref="securityManager"/>
         <!-- 身份认证失败，则跳转到登录页面的配置 -->
-        <property name="loginUrl" value="/login"/>
+        <property name="loginUrl" value="/user/login"/>
+        <property name="successUrl" value="/user/index"/>
         <!-- 权限认证失败，则跳转到指定页面 -->
-        <property name="unauthorizedUrl" value="/unauthorized"/>
+        <property name="unauthorizedUrl" value="/user/error"/>
 
         <!-- 自定义的访问控制filter -->
         <property name="filters">

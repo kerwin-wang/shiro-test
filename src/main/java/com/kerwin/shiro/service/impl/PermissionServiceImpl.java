@@ -7,6 +7,8 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * <p>
  * 服务实现类
@@ -23,7 +25,7 @@ public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, Permiss
     private PermissionMapper permissionMapper;
 
     @Override
-    public Permission getPermissionByUserName(String username)
+    public List<Permission> getPermissionByUserName(String username)
     {
         return permissionMapper.queryByUsername(username);
     }

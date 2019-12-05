@@ -61,6 +61,7 @@ public class UserController
     @RequestMapping("/home")
     public String home(){
         log.info("this is user home");
+        System.out.println(getShiro());
         User user = userService.getUser(1L);
         log.info(user.toString());
         return "home";
@@ -74,5 +75,9 @@ public class UserController
     @GetMapping("/index")
     public String index(){
         return "index";
+    }
+
+    public Object getShiro(){
+        return SecurityUtils.getSubject().getPrincipal();
     }
 }

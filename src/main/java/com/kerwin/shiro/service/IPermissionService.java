@@ -15,6 +15,15 @@ import java.util.List;
  */
 public interface IPermissionService extends IService<Permission>
 {
+    /**
+     * 功能描述:
+     * 〈通过姓名获取权限〉
+     *
+     * @param username 姓名
+     * @return : java.util.List<com.kerwin.shiro.entity.Permission>
+     * @author : d.w
+     * @date : 2019/12/05 10:11
+     */
     List<Permission> getPermissionByUserName(String username);
 
 }

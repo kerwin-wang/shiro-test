@@ -11,7 +11,7 @@
     <title>Title</title>
 </head>
 <body>
-<form action="/user/login" method="post">
+<form action="/signIn" method="post">
     登录名：<input type="text" name="username" placeholder="输入登录名">
     密码：<input type="password" name="password" placeholder="输入密码">
     <input type="submit" value="提交">

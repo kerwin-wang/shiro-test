@@ -2,13 +2,12 @@ package com.kerwin.shiro.controller;
 
 import com.kerwin.shiro.entity.User;
 import com.kerwin.shiro.service.IUserService;
+import com.kerwin.shiro.utils.R;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -31,29 +30,6 @@ public class UserController extends BaseController
         return "login";
     }
 
-    @PostMapping("/login")
-    public String login(User user, Model model)
-    {
-        //使用 shiro 登录验证
-        //1 认证的核心组件：获取 Subject 对象
-        Subject subject = SecurityUtils.getSubject();
-        //2 将登陆表单封装成 token 对象
-        UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(), user.getPassword());
-        //        token.setRememberMe(true);
-        try
-        {
-            //3 让 shiro 框架进行登录验证：
-            subject.login(token);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            model.addAttribute("errorMsg", e.getMessage());
-            return "error";
-        }
-        return "index";
-    }
-
     @GetMapping("/logout")
     public String logout()
     {
@@ -63,7 +39,7 @@ public class UserController extends BaseController
     }
 
     @RequestMapping("/home/{userId}")
-    public String home(@RequestParam(value = "username",required = false) String username, @PathVariable(value = "userId") String userId)
+    public String home(@RequestParam(value = "username", required = false) String username, @PathVariable(value = "userId") String userId)
     {
         log.info("this is user home");
         System.out.println(getShiro());
@@ -89,4 +65,9 @@ public class UserController extends BaseController
         return SecurityUtils.getSubject().getPrincipal();
     }
 
+    @GetMapping("/hello")
+    @ResponseBody
+    public R hello(){
+        return R.success("hello");
+    }
 }

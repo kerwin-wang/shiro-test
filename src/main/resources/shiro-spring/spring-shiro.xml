@@ -8,6 +8,7 @@
 
     <!-- 自定义的登陆过滤器  /home=authc,userSession -->
     <bean id="userSessionFilter" class="com.kerwin.shiro.shiro.MySessionFilter"/>
+    <bean id="roleAccessFilter" class="com.kerwin.shiro.shiro.RoleAccessFilter"/>
 
     <!-- 定义cookie,用于解决Chrome doFinal错误 -->
     <bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
@@ -45,7 +46,7 @@
         <property name="filters">
             <util:map>
                 <entry key="userSession" value-ref="userSessionFilter"/>
-
+                <entry key="roles" value-ref="roleAccessFilter"/>
             </util:map>
         </property>
 
@@ -53,10 +54,10 @@
             <value>
                 /resources/**=anon
                 /login=anon
-                /home=authc,userSession
+                /signIn=anon
                 /logout=logout
-                /student/**=roles[student]
-                /teacher/**=perms[teacher:find]
+                /home=authc,userSession
+                /customer/**=roles
                 /**=authc
             </value>
         </property>

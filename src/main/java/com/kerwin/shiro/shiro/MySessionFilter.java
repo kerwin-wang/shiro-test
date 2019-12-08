@@ -2,6 +2,7 @@ package com.kerwin.shiro.shiro;
 
 import com.kerwin.shiro.entity.User;
 import com.kerwin.shiro.service.IUserService;
+import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.AccessControlFilter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,7 @@ public class MySessionFilter extends AccessControlFilter
 
         String username=  (String) subject.getPrincipal();
 
-        org.apache.shiro.session.Session session = subject.getSession();
+        Session session = subject.getSession();
         User sessionUser =(User)session.getAttribute("sessionUser");
         if(sessionUser==null) {
             //根据用户名到数据库中查询
